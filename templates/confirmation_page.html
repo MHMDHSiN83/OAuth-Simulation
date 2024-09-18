@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Page</title>
+    <style>
+        @font-face {
+    font-family: 'IranianSans';
+    src: url('static/fonts/Iranian Sans.ttf');
+}
+
+        body {
+    direction: rtl;
+    margin: 0;
+    padding: 0;
+    font-family: 'IranianSans', sans-serif;
+    background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+}
+
+.confirmation-box {
+    background: linear-gradient(145deg, #222831, #393E46);
+    padding: 40px;
+    border-radius: 15px;
+    width: 320px;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+.title {
+    font-size: 24px;
+    color: #00E1FF;
+    text-shadow: 0 0 10px rgba(0, 225, 255, 0.7);
+    margin-bottom: 20px;
+    font-weight: bold;
+    line-height: 30px;
+    letter-spacing: 1px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.info-group {
+    margin-bottom: 20px;
+    text-align: right;
+    font-size: 14px;
+    background-color: #333;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #00E1FF;
+    color: #fff;
+    box-shadow: inset 0 0 5px rgba(0, 225, 255, 0.5);
+}
+
+.confirmation-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    width: 48%;
+    padding: 12px;
+    background-color: #00E1FF;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 225, 255, 0.4);
+}
+
+button:hover {
+    background-color: #00A8CC;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+    </style>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/confirmation_styles.css') }}"> -->
+</head>
+<body>
+    <div class="container">
+        <div class="confirmation-box">
+            <span class="title">سایت فروشگاهی می‌خواهد به </span><span class="title" style="color: black;">همراه اول</span><span class="title"> دسترسی داشته باشد</span>
+            <p>آیا مایلید همراه اول اطلاعات زیر با سایت فروشگاهی به اشتراک بگذارد؟</p>
+            <form method="POST" action="/confirm">
+            <input type="hidden" name="client_id" value="{{ client_id }}">
+            <input type="hidden" name="redirect_uri" value="{{ redirect_uri }}">
+            <input type="hidden" name="scope" value="{{ scope }}">
+            <input type="hidden" name="username" value="{{ username }}">
+                <div class="info-group">
+                    <label>ایمیل: {{ email }}</label>
+                </div>
+                <div class="info-group">
+                    <label>شماره موبایل: {{ phone }}</label>
+                </div>
+                <div class="info-group">
+                    <label> نام: {{ name }}</label>
+                </div>
+                <!-- Add other information here if needed -->
+                <div class="confirmation-buttons">
+                    <button type="submit" name="confirm" value="1">ادامه</button>
+                    <button type="submit" name="confirm" value="0">بازگشت</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/shopping_styles.css') }}">
+</head>
+<body onload="show_message();">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/shop-logo.png') }}" alt="Site Logo">
+                <span>Online Shopping</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </nav>
+            {% if user %}
+                <div class="auth-options">
+                    <span class="google-signin-btn" style="padding: 10px 15px; cursor: default;">
+                        سلام
+                        {{user.get_name()}}
+                        عزیز
+                    </span>
+                    <a href="/logout" class="signin-btn">خروج</a>
+                </div>
+            {% else %}
+                <div class="auth-options">
+                    <a class="google-signin-btn" href="/login">
+                        <img src="{{ url_for('static', filename='images/black-logo.png') }}" alt="Google Icon">
+                        ورود با همراه اول
+                    </a>
+                    <a href="#" class="signin-btn">ورود / ثبت نام</a>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+    
+    <main>
+        <div class="products-container">
+            <div class="product-card">
+                <div class="img img1"></div>
+                <h3>محصول اول</h3>
+                <p>۳۰ میلیون تومان</p>
+                <button>افزودن به سبد خرید</button>
+            </div>
+            <div class="product-card">
+                <div class="img img2"></div>
+                <h3>محصول دوم</h3>
+                <p>۴۰ میلیون تومان</p>
+                <button>افزودن به سبد خرید</button>
+            </div>
+            <div class="product-card">
+                <div class="img img3"></div>
+                <h3>محصول سوم</h3>
+                <p>۵۰ میلیون تومان</p>
+                <button>افزودن به سبد خرید</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; تمام حقوق این سایت متعلق به من است</p>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function show_message() {
+        let message = "{{message}}"
+        switch(Number(message)) {
+            case 0:
+                break;
+            case 1:
+                Swal.fire({
+                    title: "سایت فروشگاهی",
+                    text: 'با موفقیت از طریق همراه من وارد شدید!',
+                    icon: "success",
+                    background: "#e5e5e5",
+                });
+                break;
+            case 2:
+                Swal.fire({
+                    title: "سایت فروشگاهی",
+                    text: 'با موفقیت خارج شدید!',
+                    icon: "success",
+                    background: "#e5e5e5",
+                });
+                break;
+            default:
+                Swal.fire({
+                        title: "سایت فروشگاهی",
+                        text: 'مشکلی پیش آمده، بعدا امتحان کنید!',
+                        icon: "success",
+                        background: "#e5e5e5",
+                });
+        }
+    }
+</script>
+</html>

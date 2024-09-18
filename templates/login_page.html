@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="title-with-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Site Logo" class="inline-logo">
+                <h2>ورود به همراه اول</h2>
+            </div>
+            <form method="POST" action="/login">
+                <input type="hidden" name="client_id" value="{{ client_id }}">
+                <input type="hidden" name="redirect_uri" value="{{ redirect_uri }}">
+                <input type="hidden" name="scope" value="{{ scope }}">
+                <p>ابتدا شماره موبایل خود و سپس کد دریافتی را وارد کنید.</p>
+                <div class="input-group">
+                    <label for="phone-number">شماره موبایل</label>
+                    <input type="text" id="phone-number" name="phone" required>
+                </div>
+                <div class="input-group" style="display: none;" id="code-box">
+                    <label for="password">کد ارسال شده</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button onclick="enter_code()" id="code-button" type="button">ارسال کد</button>
+                <button type="submit" style="display: none;" id="enter-code">ورود</button>
+            </form>
+        </div>
+    </div>
+<script>
+function enter_code() {
+    document.getElementById("code-box").style.display = "block";
+    document.getElementById("code-button").style.display = "none";
+    document.getElementById("enter-code").style.display = "block";
+
+}
+</script>
+</body>
+</html>
